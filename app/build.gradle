@@ -4,12 +4,14 @@ android {
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
     defaultConfig {
+        multiDexEnabled true
         applicationId "pupils.com.pupils"
         minSdkVersion 15
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
         release {
@@ -28,3 +30,4 @@ dependencies {
     compile 'com.google.android.gms:play-services:9.2.0'
     testCompile 'junit:junit:4.12'
 }
+apply plugin: 'com.google.gms.google-services'

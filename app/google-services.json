@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "614190066336",
+    "firebase_url": "https://pupils-tracking.firebaseio.com",
+    "project_id": "pupils-tracking",
+    "storage_bucket": "pupils-tracking.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:614190066336:android:bd9e18fa9c737125",
+        "android_client_info": {
+          "package_name": "pupils.com.pupils"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "614190066336-kdg8964pha7cnqtp7kjfbek2ugofd3le.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDReTE7HATI4FM5VlEb6x9mJdXEmQ14qqo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
