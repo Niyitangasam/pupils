@@ -61,9 +61,9 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
         if (authResult != null) {
             // Welcome the user
             FirebaseUser user = authResult.getUser();
-            Toast.makeText(this, "Welcome " + user.getEmail(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Welcome to pupils's tracking app\n" + user.getEmail(), Toast.LENGTH_SHORT).show();
 
-            // Go back to the main activity
+            // Then Go to the main activity
             startActivity(new Intent(this, MainActivity.class));
         }
     }
