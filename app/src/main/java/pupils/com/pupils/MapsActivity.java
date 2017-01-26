@@ -41,7 +41,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         String lon=getIntent().getStringExtra("longitude");
         LatLng located = new LatLng(Double.parseDouble(lat),Double.parseDouble(lon));
         mMap.addMarker(new MarkerOptions().position(located).title("Located"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(located));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(located,14.0f));
     }
 
 }
