@@ -5,4 +5,7 @@
     <string name="sign_up">Sign Up</string>
     <string name="sign_out">Sign Out</string>
     <string name="title_activity_location">LocationActivity</string>
+    <string name="name">Names</string>
+    <string name="email">Email</string>
+    <string name="action_save">Save</string>
 </resources>

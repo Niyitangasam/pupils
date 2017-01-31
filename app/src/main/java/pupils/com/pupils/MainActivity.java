@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         addKid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"add kid",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(MainActivity.this,KidActivity.class));
 
             }
         });
