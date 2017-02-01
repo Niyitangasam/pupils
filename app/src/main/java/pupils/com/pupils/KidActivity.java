@@ -27,7 +27,7 @@ public class KidActivity extends AppCompatActivity {
     private FirebaseDatabase mFirebaseInstance;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
-    private String userId;
+    private String userId,name,kidem;
     private EditText names;
     private EditText kidemail;
 
@@ -37,13 +37,16 @@ public class KidActivity extends AppCompatActivity {
         setContentView(R.layout.activity_kid);
         names=(EditText) findViewById(R.id.name);
         kidemail=(EditText) findViewById(R.id.kidemail);
+
         Button kidSave = (Button) findViewById(R.id.btn_save);
         kidSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mFirebaseInstance = FirebaseDatabase.getInstance();
-                mFirebaseDatabase = mFirebaseInstance.getReference("kids");
-                createUser(names.toString(),kidemail.toString());
+                name=names.getText().toString();
+                kidem=kidemail.getText().toString();
+
+                createUser(name,kidem);
+         Toast.makeText(getApplicationContext(),"names "+name +"kid email "+kidem,Toast.LENGTH_LONG).show();
             Toast.makeText(getApplicationContext(),"Thanks, Kid Info Saved",Toast.LENGTH_LONG).show();
                 finish();
 
@@ -52,7 +55,8 @@ public class KidActivity extends AppCompatActivity {
     }
 
     private void createUser(String names, String kidemail) {
-
+        mFirebaseInstance = FirebaseDatabase.getInstance();
+        mFirebaseDatabase = mFirebaseInstance.getReference("kids");
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         String email=mFirebaseUser.getEmail();
@@ -63,10 +67,9 @@ public class KidActivity extends AppCompatActivity {
 
         Kid kid = new Kid(names,email,kidemail);
 
-        mFirebaseDatabase.child(userId).setValue(kid);
+        mFirebaseDatabase.push().setValue(kid);
 
-        addUserChangeListener();
-        Toast.makeText(getApplicationContext(),"kid saved", Toast.LENGTH_LONG).show();
+       // addUserChangeListener();
     }
     private void addUserChangeListener() {
         mFirebaseDatabase.child(userId).addValueEventListener(new ValueEventListener() {

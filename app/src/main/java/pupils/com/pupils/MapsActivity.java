@@ -13,7 +13,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-
+    private String lat;
+    private String lon;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,11 +38,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        String lat=getIntent().getStringExtra("latitude");
-        String lon=getIntent().getStringExtra("longitude");
+       lat=getIntent().getStringExtra("latitude");
+       lon=getIntent().getStringExtra("longitude");
         LatLng located = new LatLng(Double.parseDouble(lat),Double.parseDouble(lon));
         mMap.addMarker(new MarkerOptions().position(located).title("Located"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(located,14.0f));
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

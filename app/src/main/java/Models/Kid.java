@@ -18,4 +18,16 @@ public class Kid {
         this.email = email;
         this.kidemail = kidemail;
     }
+
+    public String getNames() {
+        return names;
+    }
+
+    public String getKidemail() {
+        return kidemail;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 }

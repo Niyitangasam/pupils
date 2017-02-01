@@ -19,4 +19,16 @@ public class User {
         this.latitude = latitude;
         this.longitude = longitude;
     }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 }
