@@ -78,10 +78,16 @@ public class LocationActivity extends Activity implements OnLocationUpdatedListe
         stopLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(latitude!=null && !latitude.isEmpty()){
                Intent intent=new Intent(LocationActivity.this,MapsActivity.class);
                 intent.putExtra("latitude",latitude);
                 intent.putExtra("longitude",longitude);
                 startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"Unable to get your Current Location", Toast.LENGTH_LONG).show();
+
+                }
             }
         });
 

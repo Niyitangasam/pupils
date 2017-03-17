@@ -116,11 +116,18 @@ public class ListKidsActivity extends ListActivity {
                     }
 
                 }
-                Intent intent=new Intent(ListKidsActivity.this,MapsActivity.class);
-                intent.putExtra("latitude",latitude);
-                intent.putExtra("longitude",longitude);
-                finish();
-                startActivity(intent);
+                if(latitude!=null && !latitude.isEmpty()) {
+                    Intent intent = new Intent(ListKidsActivity.this, MapsActivity.class);
+                    intent.putExtra("latitude", latitude);
+                    intent.putExtra("longitude", longitude);
+                    finish();
+                    startActivity(intent);
+                }
+                else{
+
+                    Toast.makeText(getApplicationContext(),"Unable to get your Kid's  Location", Toast.LENGTH_LONG).show();
+
+                }
 
             }
 
