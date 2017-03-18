@@ -16,15 +16,20 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:text="Sign In"
+            android:text="@string/register"
             android:gravity="center"
-            android:textSize="16dip"/>
+            android:textSize="36sp"
+            android:textStyle="normal|bold"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryText" />
 
         <ImageView android:src="@mipmap/ic_launcher"
             android:layout_width="wrap_content"
-            android:layout_height="72dp"
-            android:layout_marginBottom="24dp"
-            android:layout_gravity="center_horizontal" />
+            android:layout_marginBottom="50dp"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/logo_image"
+            android:layout_height="150dp"
+            />
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/sign_in_button"
@@ -32,7 +37,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_shape"
             android:visibility="visible"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:paddingTop="50dp"
+            android:paddingBottom="50dp"/>
 
 
 

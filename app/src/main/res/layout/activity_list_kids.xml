@@ -9,10 +9,14 @@
     tools:context=".MainActivity" >
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/mainText"
-        android:text="My Kids" />
+        android:text="@string/my_kids"
+        android:textSize="24sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textAlignment="center"
+        android:textStyle="normal|bold" />
 
     <ListView
         android:layout_width="wrap_content"
@@ -26,7 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/mainText"
         android:id="@android:id/empty"
-        android:text="There is no data"
+        android:textColor="#ff0000"
+        android:text="@string/there_is_no_data"
         android:textStyle="bold" />
 
 </RelativeLayout>

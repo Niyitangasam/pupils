@@ -30,6 +30,7 @@ public class KidActivity extends AppCompatActivity {
     private String userId,name,kidem;
     private EditText names;
     private EditText kidemail;
+    private Button kidSave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,16 +39,19 @@ public class KidActivity extends AppCompatActivity {
         names=(EditText) findViewById(R.id.name);
         kidemail=(EditText) findViewById(R.id.kidemail);
 
-        Button kidSave = (Button) findViewById(R.id.btn_save);
+        kidSave = (Button) findViewById(R.id.btn_save);
         kidSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!validate()) {
+                    onRegisterFailed();
+                    return;
+                }
                 name=names.getText().toString();
                 kidem=kidemail.getText().toString();
-
                 createUser(name,kidem);
-         Toast.makeText(getApplicationContext(),"names "+name +"kid email "+kidem,Toast.LENGTH_LONG).show();
-            Toast.makeText(getApplicationContext(),"Thanks, Kid Info Saved",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"names "+name +"kid email "+kidem,Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Thanks, Kid Info Saved",Toast.LENGTH_LONG).show();
                 finish();
 
             }
@@ -88,5 +92,34 @@ public class KidActivity extends AppCompatActivity {
                 Log.e(TAG, "Failed to read Kid");
             }
         });
+    }
+
+    public boolean validate() {
+        boolean valid = true;
+
+        String mName = names.getText().toString();
+        String mKidmail = kidemail.getText().toString();
+
+        if (mKidmail.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(mKidmail).matches()) {
+            kidemail.setError("enter a valid email address");
+            valid = false;
+        } else {
+            kidemail.setError(null);
+        }
+
+        if (mName.isEmpty()) {
+            names.setError("Kid Names Must not be empty");
+            valid = false;
+        } else {
+            names.setError(null);
+        }
+
+        return valid;
+    }
+
+    public void onRegisterFailed() {
+        Toast.makeText(getBaseContext(), "Adding Kid info failed", Toast.LENGTH_LONG).show();
+
+        kidSave.setEnabled(true);
     }
 }

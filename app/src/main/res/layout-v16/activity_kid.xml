@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".KidActivity">
-
+    
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
@@ -22,14 +22,11 @@
         android:textStyle="normal|bold"
         android:textAlignment="center"
         android:textSize="30sp"
-        android:fontFamily="casual"
         android:textColor="@color/colorPrimaryDark" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
+            android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/name"
@@ -43,9 +40,7 @@
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
+            android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/kidemail"
@@ -57,13 +52,12 @@
 
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.v7.widget.AppCompatButton
+        <Button
             android:id="@+id/btn_save"
+            style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginTop="16dp"
             android:background="@color/colorPrimary"
             android:text="@string/action_save"
             android:textColor="@android:color/white"

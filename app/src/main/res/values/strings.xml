@@ -8,4 +8,16 @@
     <string name="name">Names</string>
     <string name="email">Email</string>
     <string name="action_save">Save</string>
+    <string name="addPupilsTitle">ADD YOUR KIDS</string>
+    <string name="my_kids">MY KIDS</string>
+    <string name="there_is_no_data">There is no data</string>
+    <string name="activity">Activity</string>
+    <string name="location">Location</string>
+    <string name="geofence">Geofence</string>
+    <string name="view_on_map">View on Map!</string>
+    <string name="view_kids_location">View Kids Location!</string>
+    <string name="add_kid_info">Add Kid info!</string>
+    <string name="ManageKids">Manage Your Kids</string>
+    <string name="register">Register</string>
+    <string name="logo_image">logo Image</string>
 </resources>
