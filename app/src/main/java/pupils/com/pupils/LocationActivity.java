@@ -13,17 +13,27 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.location.DetectedActivity;
 import com.google.android.gms.location.Geofence;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import Models.User;
 import io.nlopez.smartlocation.OnActivityUpdatedListener;
 import io.nlopez.smartlocation.OnGeofencingTransitionListener;
 import io.nlopez.smartlocation.OnLocationUpdatedListener;
@@ -33,6 +43,8 @@ import io.nlopez.smartlocation.geofencing.model.GeofenceModel;
 import io.nlopez.smartlocation.geofencing.utils.TransitionGeofence;
 import io.nlopez.smartlocation.location.providers.LocationGooglePlayServicesProvider;
 
+import static android.content.ContentValues.TAG;
+
 public class LocationActivity extends Activity implements OnLocationUpdatedListener, OnActivityUpdatedListener, OnGeofencingTransitionListener {
 
     private TextView locationText;
@@ -40,6 +52,12 @@ public class LocationActivity extends Activity implements OnLocationUpdatedListe
     private TextView geofenceText;
     private String latitude;
     private String longitude;
+    private DatabaseReference mFirebaseDatabase;
+    private FirebaseDatabase mFirebaseInstance;
+    private String userId;
+    private LocationGooglePlayServicesProvider provide;
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
 
     private LocationGooglePlayServicesProvider provider;
 
@@ -60,10 +78,16 @@ public class LocationActivity extends Activity implements OnLocationUpdatedListe
         stopLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(latitude!=null && !latitude.isEmpty()){
                Intent intent=new Intent(LocationActivity.this,MapsActivity.class);
                 intent.putExtra("latitude",latitude);
                 intent.putExtra("longitude",longitude);
                 startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"Unable to get your Current Location", Toast.LENGTH_LONG).show();
+
+                }
             }
         });
 
@@ -149,7 +173,10 @@ public class LocationActivity extends Activity implements OnLocationUpdatedListe
             locationText.setText(text);
             latitude= String.format("%.6f",location.getLatitude());
             longitude= String.format("%.6f",location.getLongitude());
+            mFirebaseInstance = FirebaseDatabase.getInstance();
+            mFirebaseDatabase = mFirebaseInstance.getReference("users");
 
+            createUser(latitude, longitude);
             // We are going to get the address for the current position
             SmartLocation.with(this).geocoding().reverse(location, new OnReverseGeocodingListener() {
                 @Override
@@ -234,5 +261,41 @@ public class LocationActivity extends Activity implements OnLocationUpdatedListe
                 return "dwell";
         }
     }
+    private void createUser(String latitude, String longitude) {
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        String email=mFirebaseUser.getEmail();
+
+        if (TextUtils.isEmpty(userId)) {
+            userId = mFirebaseUser.getUid();
+        }
+
+        User user = new User(email,latitude,longitude);
+
+        mFirebaseDatabase.child(userId).setValue(user);
+
+        addUserChangeListener();
+        Toast.makeText(getApplicationContext(),"user created", Toast.LENGTH_LONG).show();
+    }
+    private void addUserChangeListener() {
+        mFirebaseDatabase.child(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                if (user == null) {
+                    Log.e(TAG, "User data is null!");
+                    return;
+                }
+                Log.e(TAG, "User data is changed!" + user.email + ", " + user.latitude+ ", " + user.longitude);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "Failed to read user");
+            }
+        });
+    }
+
 }
 

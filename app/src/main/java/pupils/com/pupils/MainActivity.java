@@ -6,6 +6,9 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -33,12 +36,11 @@ public class MainActivity extends AppCompatActivity {
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mUsername = ANONYMOUS;
 
-        // Initialize Firebase Auth
+
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
         if (mFirebaseUser == null) {
-            // Not signed in, launch the Sign In activity
             startActivity(new Intent(this, SignInActivity.class));
             finish();
             return;
@@ -48,8 +50,26 @@ public class MainActivity extends AppCompatActivity {
                 mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
 
             }
-            Toast.makeText(getApplicationContext(),"welcome back "+ mUsername,Toast.LENGTH_LONG);
+
         }
+
+        Button viewLocation = (Button) findViewById(R.id.locate);
+        viewLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               startActivity(new Intent(MainActivity.this,ListKidsActivity.class));
+
+            }
+        });
+
+        Button addKid = (Button) findViewById(R.id.add_kid);
+        addKid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,KidActivity.class));
+
+            }
+        });
 
     }
     @Override

@@ -11,4 +11,24 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="pupils.com.pupils.MainActivity">
 
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View Kids Location!"
+            android:id="@+id/locate"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Kid info!"
+            android:id="@+id/add_kid"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
 </RelativeLayout>
