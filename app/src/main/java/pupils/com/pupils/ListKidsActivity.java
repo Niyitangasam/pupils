@@ -138,6 +138,6 @@ public class ListKidsActivity extends ListActivity {
         });
 
 
-        text.setText("You clicked " + selectedItem + " at position " + position);
+       // text.setText("You clicked " + selectedItem + " at position " + position);
     }
 }
