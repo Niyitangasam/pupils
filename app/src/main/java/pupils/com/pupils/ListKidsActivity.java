@@ -73,10 +73,6 @@ public class ListKidsActivity extends ListActivity {
             }
         });
 
-
-
-
-
     }
 
     @Override
